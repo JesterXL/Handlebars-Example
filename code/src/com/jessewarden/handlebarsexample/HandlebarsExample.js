@@ -24,10 +24,10 @@ define(["com/jessewarden/handlebarsexample/utils/HandlebarsTemplateLoader.js",
 			var templateHTML = simpleTemplateCompiled(data);
 			logger.debug("templateHTML: ", templateHTML);
 			// inject it!
-			logger.debug("targetDiv: ", $('content'));
-			logger.debug("before: ", $('content').html());
+			logger.debug("targetDiv: ", $('#content'));
+			logger.debug("before: ", $('#content').html());
 			$('#content').html(templateHTML);
-			logger.debug("after: ", $('content').html());
+			logger.debug("after: ", $('#content').html());
 
 		});
 
