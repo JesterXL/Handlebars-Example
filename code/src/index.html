@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>Handlebars Example</title>
+
+</head>
+<body>
+
+<script src="libs/require/require.js"></script>
+<script src="libs/log4javascript/log4javascript_uncompressed.js"></script>
+<!-- Note, I'm not using hbs by Alex Sexton here, just the global class. -->
+<!-- Just be aware this won't work with require. -->
+<script src="libs/handlebars/handlebars.js"></script>
+
+<div id="content">Loading...</div>
+
+<script>
+
+	// setup logging
+	var logger = log4javascript.getLogger("HandlebarsExmaple");
+	logger.setLevel(log4javascript.Level.ALL);
+	logger.addAppender(new log4javascript.BrowserConsoleAppender());
+	window.logger = logger;
+	logger.debug("index.html::log4javascript ready to rock.");
+
+	// configure require
+	require.config({
+		baseUrl: "./",
+		optimize: "uglify",
+		waitSeconds: 10,
+		packages: [
+			{
+				name: "jquery",
+				location: "./libs/jquery",
+				main: "jquery"
+			}
+		]
+	});
+
+	// start this mug
+	require(["com/jessewarden/handlebarsexample/HandlebarsExample.js"]);
+
+
+</script>
+
+</body>
+</html>
