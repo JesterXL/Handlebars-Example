@@ -27,6 +27,12 @@
 		paths: {
 			hbs: "./libs/handlebars/hbs"
 		},
+		hbs : {
+	        templateExtension : 'hbs',
+	        // if disableI18n is `true` it won't load locales and the i18n helper
+	        // won't work as well.
+	        disableI18n : false
+	    },
 		packages: [
 			{
 				name: "jquery",
@@ -42,6 +48,11 @@
 				name: "underscore",
 				location: "./libs/underscore",
 				main: "underscore"
+			},
+			{
+				name: "handlebars",
+				location: "./libs/handlebars",
+				main: "handlebars"
 			}
 		]
 	});
@@ -66,12 +77,14 @@
 	});
 	*/
 
-	require(["hbs!com/jessewarden/handlebarsexample/templates/SimpleTemplate.hbs"], function(hbs)
+	require(["hbs!com/jessewarden/handlebarsexample/templates/SimpleTemplate", "jquery"], function(simpleTemplate, $)
 	{
-		logger.debug("hbs: ", hbs);
+		logger.debug("simpleTemplate: ", simpleTemplate);
 		var data = {firstName: "Jesse Warden", description: "Uber crackead ready to rock the mic."};
-		var html = hbs(data);
+		var html = simpleTemplate(data);
 		logger.debug("html: ", html);
+		$("#content").html(html);
+		
 	});
 	
 

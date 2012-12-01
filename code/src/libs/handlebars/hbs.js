@@ -19,7 +19,6 @@ define([
 //>>excludeEnd('excludeHbs')
 ) {
 //>>excludeStart('excludeHbs', pragmas.excludeHbs)
-logger.debug("Handlebars: ", Handlebars);
   var fs, getXhr,
         progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'],
         fetchText = function () {
@@ -294,6 +293,7 @@ logger.debug("Handlebars: ", Handlebars);
 
             function fetchAndRegister(langMap){
               fetchText(path, function (text) {
+
                   // for some reason it doesn't include hbs _first_ when i don't add it here...
                   var nodes = Handlebars.parse(text),
                       deps = findPartialDeps( nodes ),
@@ -318,6 +318,7 @@ logger.debug("Handlebars: ", Handlebars);
                       debugOutputEnd   = "",
                       debugProperties = "",
                       metaObj, head, linkElem;
+
 
                   if ( depStr ) {
                     depStr = ",'hbs!" + depStr + "'";
@@ -387,7 +388,7 @@ logger.debug("Handlebars: ", Handlebars);
                       prec = precompile( text, mapping, { originalKeyFallback: (config.hbs || {}).originalKeyFallback });
 
                   text = "/* START_TEMPLATE */\n" +
-                         "define(['hbs','libs/handlebars/handlebars'"+depStr+helpDepStr+"], function( hbs, Handlebars ){ \n" +
+                         "define(['hbs','handlebars'"+depStr+helpDepStr+"], function( hbs, Handlebars ){ \n" +
                            "var t = Handlebars.template(" + prec + ");\n" +
                            "Handlebars.registerPartial('" + name.replace( /\//g , '_') + "', t);\n" +
                            debugProperties +
